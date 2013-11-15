@@ -1,0 +1,12 @@
+070d7ef63fa73dee3731f43e2f9fc680 *DESCRIPTION
+5e6731e95391089adbffe5494869bc87 *NAMESPACE
+5b1f0a2e22b721fbd7ef690ba6bdcbe3 *R/GG2-02-boot-ver002.R
+dc9dd7ccb075e3468a1479ab319bfeac *R/KM2-02-pert-ver002.R
+1d854ae101cbdf34eb9bc7b3e9045eaa *R/ainternalmedicine-ver001.R
+98bb7829987d76a6defe2c333a40acab *R/plot.surv2sample.R
+006408730bb655d962439abb8af0bb2a *R/surv2sample-ver001.R
+7406a7487f110132a9415e2580a30689 *man/plot.surv2sample.Rd
+19022745e3409cfa7715167895fe0c9a *man/rmstaug.Rd
+1dfb895c33f50e07d0cc54f66b1376b3 *man/rmstreg.Rd
+b8c53efa927d1ebbd0760dcd42c51ff6 *man/surv2sample.Rd
+2531ed0f959c878cdc97546217845f1d *man/surv2sampleComp-package.Rd
