@@ -40,12 +40,9 @@ Specifies the inference procedure. A non-parametric procedure by the method of K
 }
 \author{Hajime Uno}
 \examples{
-D=CompCase(pbc[,c(2:4,10:14)]) 
-year=D$time/365.25
-status=as.numeric(D[,2]==2)
-arm=as.numeric(D$trt==2)
+D=pbc.sample()
 
-surv2sample(year, status, arm, npert=500, timepoints=c(2,4,6,8), 
+surv2sample(D$time, D$status, D$group, npert=500, timepoints=c(2,4,6,8), 
                   quanprobs =c(0.25, 0.5), tau=8, procedure="KM")
 
 }

@@ -35,12 +35,8 @@ Tian, Lu; Zhao, Lihui; and Wei, LJ. "On the Restricted Mean Event Time in Surviv
 Lu Tian
 }
 \examples{
-D=CompCase(pbc[,c(2:4,10:14)]) 
-year=D$time/365.25
-status=as.numeric(D[,2]==2)
-arm=as.numeric(D$trt==2)
-covs=as.matrix(D[,4:8])
-x=cbind(arm, covs)
-rmstreg(year, status, x, arm, tau=8, type="difference")
+D=pbc.sample()
+x=cbind(D$group, D$covariates)
+rmstreg(D$time, D$status, x, D$group, tau=8, type="difference")
 
 }
