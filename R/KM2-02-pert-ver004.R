@@ -1,5 +1,5 @@
 #############################
-# Perturbation
+# Perturbation: ver003 add averages
 #############################
 KM2.pert=function(time, status, npert=300, timepoints=c(12,24,36,40), quanprobs=c(0.1, 0.15, 0.2), tau=NULL){
 	
@@ -9,6 +9,9 @@ KK=npert+1
 k.time=length(timepoints) ; p.time=matrix(0, nrow=KK, ncol=k.time)
 k.quan=length(quanprobs)  ; q.time=matrix(0, nrow=KK, ncol=k.quan)
 rmst=rep(0, KK)
+p.time.ave =rep(0, KK)
+q.time.ave =rep(0, KK)
+
 if(is.null(tau)) tau=max(time[status==1])
 
 #===========================================
@@ -26,8 +29,11 @@ if(is.null(tau)) tau=max(time[status==1])
  	
  #--- quantiles ----------
  for (k in 1:k.quan){
-  idx=ft$surv>=1-quanprobs[k] ; q.time[i, k]=max(ft$time[idx])}
+  idx=ft$surv<=(1-quanprobs[k]) ; q.time[i, k]=min(ft$time[idx])}
 
+ #--- Average of t-year survivals and average percentiles (ver003) ---
+  p.time.ave[i]=mean(p.time[i,])
+  q.time.ave[i]=mean(q.time[i,])
 
 #===========================================
 # perturbation
@@ -46,6 +52,11 @@ for (i in 2:KK){
  #--- quantiles ----------
  for (k in 1:k.quan){
   idx=ft$surv>=1-quanprobs[k] ; q.time[i, k]=max(ft$time[idx])}
+
+ #--- Average of t-year survivals and average percentiles (ver003) ---
+  p.time.ave[i]=mean(p.time[i,])
+  q.time.ave[i]=mean(q.time[i,])
+
 }
 #===========================================
 
@@ -57,5 +68,8 @@ for (i in 2:KK){
  Z$rmst=rmst
  Z$tau=tau
  
+ Z$tyearprobs.ave=p.time.ave
+ Z$percentiles.ave=q.time.ave
+
  return(Z)
 }

@@ -1,5 +1,5 @@
 #############################
-# surv2sampleComp
+# surv2sampleComp (ver002) add average t-years and percentiles
 #############################
 q95=function(x){ quantile(x, prob=c(0.025, 0.975))}
 
@@ -24,14 +24,17 @@ if(procedure=="GG"){
   
 
 #--- each arm ---
-  wk0=cbind(km0$rmst, tau-km0$rmst, km0$tyearprobs, km0$percentiles)
-  wk1=cbind(km1$rmst, tau-km1$rmst, km1$tyearprobs, km1$percentiles)
+# wk0=cbind(km0$rmst, tau-km0$rmst, km0$tyearprobs, km0$percentiles)
+# wk1=cbind(km1$rmst, tau-km1$rmst, km1$tyearprobs, km1$percentiles)
+  wk0=cbind(km0$rmst, tau-km0$rmst, km0$tyearprobs, km0$percentiles, km0$tyearprobs.ave, km0$percentiles.ave)
+  wk1=cbind(km1$rmst, tau-km1$rmst, km1$tyearprobs, km1$percentiles, km1$tyearprobs.ave, km1$percentiles.ave)
   se0=apply(wk0[-1,], 2, sd)
   se1=apply(wk1[-1,], 2, sd)
   ci0=apply(wk0[-1,], 2, q95)
   ci1=apply(wk1[-1,], 2, q95)
 
-  measure=c("RMST","Loss time", paste("Prob at",timepoints), paste("Quantile at", quanprobs*100,"%")) 
+# measure=c("RMST","Loss time", paste("Prob at",timepoints), paste("Quantile at", quanprobs*100,"%")) 
+  measure=c("RMST","Loss time", paste("Prob at",timepoints), paste("Quantile at", quanprobs*100,"%"), "Ave of t-year event rates","Ave percentiles") 
   
   out.group0=cbind(t(wk0[1,]), t(ci0), se0)
   out.group1=cbind(t(wk1[1,]), t(ci1), se1)
@@ -122,8 +125,8 @@ if(procedure=="GG"){
  Z$group1=out.group1
  Z$RMST=out.contrast[measures=="RMST",]
  Z$RMLT=out.contrast[measures=="Loss time",]
- Z$contrast.diff10=out.contrast[contrast=="Group0-Group1",]
- Z$contrast.diff01=out.contrast[contrast=="Group1-Group0",]
+ Z$contrast.diff10=out.contrast[contrast=="Group1-Group0",]
+ Z$contrast.diff01=out.contrast[contrast=="Group0-Group1",]
  Z$contrast.ratio01=out.contrast[contrast=="Group0/Group1",]
  Z$contrast.ratio10=out.contrast[contrast=="Group1/Group0",]
  
