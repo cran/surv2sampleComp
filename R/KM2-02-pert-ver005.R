@@ -29,8 +29,21 @@ if(is.null(tau)) tau=max(time[status==1])
  	
  #--- quantiles ----------
  for (k in 1:k.quan){
-  idx=ft$surv<=(1-quanprobs[k]) ; q.time[i, k]=min(ft$time[idx])}
 
+######### ver004 #########
+
+  idx1=round(ft$surv,digits=14) <= (1-quanprobs[k]) ;
+  idx2=round(ft$surv,digits=14) <  (1-quanprobs[k]) ;
+  if(sum(as.numeric(idx1))==0){
+  	q.time[i, k]=NA
+    }else{ 
+     if(sum(as.numeric(idx1)) == sum(as.numeric(idx2))){
+      	 q.time[i, k]= min(ft$time[idx1])
+     	}else{
+      	 q.time[i, k]=(min(ft$time[idx1]) + min(ft$time[idx2]))/2
+        }
+    }
+  }
  #--- Average of t-year survivals and average percentiles (ver003) ---
   p.time.ave[i]=mean(p.time[i,])
   q.time.ave[i]=mean(q.time[i,])
@@ -49,9 +62,19 @@ for (i in 2:KK){
  for (k in 1:k.time){
   idx=ft$time<timepoints[k] ; p.time[i, k]=min(ft$surv[idx])}
  	
- #--- quantiles ----------
+ #--- quantiles ---------- 
  for (k in 1:k.quan){
-  idx=ft$surv>=1-quanprobs[k] ; q.time[i, k]=max(ft$time[idx])}
+
+  ######### ver004 #########
+
+  idx1=round(ft$surv,digits=14) <= (1-quanprobs[k]) ;
+  idx2=round(ft$surv,digits=14) <  (1-quanprobs[k]) ;
+     if(sum(as.numeric(idx1)) == sum(as.numeric(idx2))){
+      	 q.time[i, k]= min(ft$time[idx1])
+     	}else{
+      	 q.time[i, k]=(min(ft$time[idx1]) + min(ft$time[idx2]))/2
+        }
+   }
 
  #--- Average of t-year survivals and average percentiles (ver003) ---
   p.time.ave[i]=mean(p.time[i,])

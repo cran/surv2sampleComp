@@ -12,8 +12,8 @@ Performs inference of several model-free group contrast measures, which include 
 \tabular{ll}{
 Package: \tab surv2sampleComp\cr
 Type: \tab Package\cr
-Version: \tab 1.0-3\cr
-Date: \tab 2013-12-23\cr
+Version: \tab 1.0-4\cr
+Date: \tab 2014-7-10\cr
 License: \tab GLP-2\cr
 }
 

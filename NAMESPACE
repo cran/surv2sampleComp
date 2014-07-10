@@ -1,4 +1,8 @@
 ## exportPattern("^[[:alpha:]]+")
 
+import(survival)
+import(survC1)
+import(flexsurv)
+import(plotrix)
 export(surv2sample, rmstreg, rmstaug, plot.surv2sample, pbc.sample)
 S3method(plot, surv2sample)
